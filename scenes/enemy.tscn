@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://b8miki5vxkikg"]
+
+[ext_resource type="Script" uid="uid://cpvl1rs8ipoqp" path="res://scripts/enemy.gd" id="1_a1412"]
+[ext_resource type="Texture2D" uid="uid://cv8utx13tk777" path="res://sprites/meanball2.png" id="2_ejytf"]
+[ext_resource type="AudioStream" uid="uid://r7ngsk0ikvgl" path="res://sounds/wall_hit.mp3" id="3_5uy6h"]
+[ext_resource type="AudioStream" uid="uid://d4kgv0t3agqkq" path="res://sounds/vine-boom.mp3" id="4_5uy6h"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_a1412"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a1412"]
+radius = 16.0
+
+[node name="Enemy" type="RigidBody2D" groups=["enemies"]]
+physics_material_override = SubResource("PhysicsMaterial_a1412")
+gravity_scale = 0.0
+can_sleep = false
+contact_monitor = true
+max_contacts_reported = 1
+linear_damp_mode = 1
+script = ExtResource("1_a1412")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.5, 1.5)
+shape = SubResource("CircleShape2D_a1412")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_ejytf")
+
+[node name="WallSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_5uy6h")
+
+[node name="BallSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_5uy6h")
+volume_db = -20.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

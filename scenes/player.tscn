@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cco7p8mijs4gy"]
+
+[ext_resource type="Script" uid="uid://l1u57pos6gkl" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://qn8hi01powp6" path="res://sprites/happyball.png" id="2_qhqgy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_onrkg"]
+radius = 16.0
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_g2els")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.5, 1.5)
+shape = SubResource("CircleShape2D_onrkg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_qhqgy")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

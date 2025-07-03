@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://d20nksb7x1d31"]
+
+[ext_resource type="Script" uid="uid://dnwphlp1nk4wf" path="res://scripts/dead_player.gd" id="1_ruovy"]
+[ext_resource type="Texture2D" uid="uid://b7k2be5l31l17" path="res://sprites/sadball.png" id="1_xs6i1"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ruovy"]
+friction = 0.5
+bounce = 0.6
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cmqxu"]
+radius = 16.0
+
+[node name="DeadPlayer" type="RigidBody2D" groups=["dead_players"]]
+physics_material_override = SubResource("PhysicsMaterial_ruovy")
+script = ExtResource("1_ruovy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_xs6i1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.5, 1.5)
+shape = SubResource("CircleShape2D_cmqxu")
